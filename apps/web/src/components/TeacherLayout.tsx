@@ -47,13 +47,13 @@ export default function TeacherLayout() {
             <Icon name="switch_account" />
             <span className="font-label-sm text-label-sm">Schüler-Ansicht</span>
           </Link>
-          <a
-            href="#"
+          <Link
+            to="/datenschutz"
             className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all"
           >
             <Icon name="shield" />
             <span className="font-label-sm text-label-sm">Privacy Center</span>
-          </a>
+          </Link>
         </div>
       </nav>
 

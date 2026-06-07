@@ -126,6 +126,7 @@ def overview(principal: Principal = Depends(current_principal)) -> dict:
         "current": current,
         "recommendations": recommendations,
         "note": ({"body": note["body"]} if note else None),
+        "goal": {"practiced": len(practiced), "total": len(rows)},
     }
 
 

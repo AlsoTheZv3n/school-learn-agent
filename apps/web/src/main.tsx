@@ -4,8 +4,12 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import "./index.css";
+import InfoLayout from "./components/InfoLayout";
 import StudentLayout from "./components/StudentLayout";
 import TeacherLayout from "./components/TeacherLayout";
+import DatenschutzPage from "./info/DatenschutzPage";
+import ImpressumPage from "./info/ImpressumPage";
+import UeberPage from "./info/UeberPage";
 import { SessionProvider, useSession } from "./lib/session";
 import HomePage from "./student/HomePage";
 import LibraryPage from "./student/LibraryPage";
@@ -61,6 +65,11 @@ createRoot(root).render(
               <Route path="/teacher/student/:id" element={<StudentDetailPage />} />
               <Route path="/teacher/review" element={<ReviewQueuePage />} />
               <Route path="/teacher/settings" element={<SettingsPage />} />
+            </Route>
+            <Route element={<InfoLayout />}>
+              <Route path="/datenschutz" element={<DatenschutzPage />} />
+              <Route path="/ueber" element={<UeberPage />} />
+              <Route path="/impressum" element={<ImpressumPage />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

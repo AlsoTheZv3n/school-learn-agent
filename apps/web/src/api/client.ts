@@ -55,6 +55,7 @@ export interface StudentOverview {
   } | null;
   recommendations: { skill_key: string; name: string; subject_name: string }[];
   note: { body: string } | null;
+  goal: { practiced: number; total: number };
 }
 export interface StudentNote {
   body: string;

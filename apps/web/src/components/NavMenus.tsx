@@ -82,7 +82,7 @@ function PrivacyMenu() {
       icon="security"
       label="Datenschutz-Status"
       width="w-80"
-      render={() => (
+      render={(close) => (
         <div>
           <div className="p-md border-b border-outline-variant/20 bg-secondary-container/40 flex items-center gap-sm">
             <Icon name="verified_user" filled className="text-secondary" />
@@ -99,9 +99,13 @@ function PrivacyMenu() {
               </li>
             ))}
           </ul>
-          <a href="#" className="block p-md border-t border-outline-variant/20 font-label-sm text-label-sm text-primary hover:bg-surface-container-low transition-colors">
+          <Link
+            to="/datenschutz"
+            onClick={close}
+            className="block p-md border-t border-outline-variant/20 font-label-sm text-label-sm text-primary hover:bg-surface-container-low transition-colors"
+          >
             Zur Datenschutzerklärung →
-          </a>
+          </Link>
         </div>
       )}
     />

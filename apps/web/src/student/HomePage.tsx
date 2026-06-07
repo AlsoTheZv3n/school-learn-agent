@@ -26,6 +26,9 @@ export default function HomePage() {
   const name = info?.student_name ?? "";
   const current = data?.current;
   const pct = current ? Math.round(current.mastery * 100) : 0;
+  const goal = data?.goal ?? { practiced: 0, total: 0 };
+  const goalPct = goal.total ? Math.round((goal.practiced / goal.total) * 100) : 0;
+  const goalDone = goal.total > 0 && goal.practiced >= goal.total;
 
   return (
     <>
@@ -88,14 +91,16 @@ export default function HomePage() {
           <div className="relative w-32 h-32 flex items-center justify-center mb-md">
             <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
               <path className="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
-              <path className="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray="100, 100" strokeWidth="3" />
+              <path className="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray={`${goalPct}, 100`} strokeLinecap="round" strokeWidth="3" />
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Icon name="star" filled className="text-secondary text-3xl" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <Icon name={goalDone ? "star" : "bolt"} filled className="text-secondary text-3xl" />
             </div>
           </div>
-          <p className="font-title-md text-title-md text-primary">Geschafft!</p>
-          <p className="font-body-md text-on-surface-variant mt-xs">1 von 1 Konzept geübt</p>
+          <p className="font-title-md text-title-md text-primary">{goalDone ? "Geschafft!" : "Dranbleiben!"}</p>
+          <p className="font-body-md text-on-surface-variant mt-xs">
+            {goal.practiced} von {goal.total} Konzepten geübt
+          </p>
         </div>
       </section>
 
@@ -112,7 +117,11 @@ export default function HomePage() {
             const m = SUBJECT_ICON[s.key] ?? SUBJECT_ICON.math;
             const p = Math.round(s.mastery * 100);
             return (
-              <div key={s.key} className="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/10 flex items-center gap-md">
+              <Link
+                key={s.key}
+                to="/bibliothek"
+                className="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/10 flex items-center gap-md hover:bg-surface-container-low hover:-translate-y-0.5 transition-all"
+              >
                 <div className={`w-12 h-12 rounded-lg ${m.bg} flex items-center justify-center ${m.fg}`}>
                   <Icon name={m.icon} />
                 </div>
@@ -125,7 +134,7 @@ export default function HomePage() {
                     <span className="font-caption text-caption text-on-surface-variant">{p}%</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
           {!data && <p className="font-body-md text-on-surface-variant">Lade …</p>}

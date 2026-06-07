@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer className="bg-surface-dim w-full py-xl border-t border-outline-variant/20 flex flex-col items-center justify-center gap-md text-center px-gutter mt-auto">
@@ -5,22 +7,25 @@ export default function Footer() {
         <p className="font-caption text-caption text-on-surface-variant">
           © 2026 EduSovereign. 🇨🇭 In CH/EU gehostet
         </p>
-        <p className="font-label-sm text-label-sm mt-xs underline decoration-secondary text-primary">
+        <Link
+          to="/ueber"
+          className="inline-block font-label-sm text-label-sm mt-xs underline decoration-secondary text-primary hover:text-secondary transition-colors"
+        >
           Eine Lehrperson behält die Kontrolle
-        </p>
+        </Link>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-md">
-        <a className="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">
+        <Link to="/datenschutz" className="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors">
           Datenschutz
-        </a>
+        </Link>
         <span className="text-outline-variant">•</span>
-        <a className="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">
+        <Link to="/impressum" className="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors">
           Nutzungsbedingungen
-        </a>
+        </Link>
         <span className="text-outline-variant">•</span>
-        <a className="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">
+        <Link to="/ueber" className="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors">
           Ethical AI Commitment
-        </a>
+        </Link>
       </div>
     </footer>
   );
