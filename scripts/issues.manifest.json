@@ -1,0 +1,117 @@
+{
+  "_comment": "Source of truth for the GitHub bootstrap. Metadata is transcribed verbatim from docs/01-github-issues.md. Rich issue bodies live in docs/issues/<KEY>.md (tasks) and docs/issues/epics/<EKEY>.md (epics) and are generated as part of the detailed-planning step.",
+  "repo": "AlsoTheZv3n/school-learn-agent",
+  "labels": [
+    { "name": "epic", "color": "6f42c1", "description": "Epic / tracking issue" },
+    { "name": "type:feature", "color": "1d76db", "description": "Feature work" },
+    { "name": "type:infra", "color": "0e8a16", "description": "Infrastructure / tooling" },
+    { "name": "type:test", "color": "fbca04", "description": "Tests" },
+    { "name": "type:docs", "color": "c5def5", "description": "Documentation" },
+    { "name": "area:db", "color": "5319e7", "description": "Database" },
+    { "name": "area:safety", "color": "b60205", "description": "Safety & isolation" },
+    { "name": "area:retrieval", "color": "0052cc", "description": "Retrieval" },
+    { "name": "area:content", "color": "bfdadc", "description": "Content ingestion" },
+    { "name": "area:agent", "color": "d93f0b", "description": "Agent loop" },
+    { "name": "area:learner-model", "color": "0e8a16", "description": "Learner model" },
+    { "name": "area:grading", "color": "1d76db", "description": "Grading" },
+    { "name": "area:backend", "color": "5319e7", "description": "Backend API" },
+    { "name": "area:frontend", "color": "fbca04", "description": "Frontend" },
+    { "name": "area:data", "color": "c2e0c6", "description": "Data / seeding" },
+    { "name": "area:auth", "color": "d4c5f9", "description": "Auth" },
+    { "name": "area:llm", "color": "f9d0c4", "description": "LLM" },
+    { "name": "priority:critical", "color": "b60205", "description": "Critical priority" },
+    { "name": "safety-critical", "color": "e11d21", "description": "Breakage leaks student data" },
+    { "name": "good-first-issue", "color": "7057ff", "description": "Good first issue" },
+    { "name": "blocked", "color": "000000", "description": "Blocked by dependency" }
+  ],
+  "milestones": [
+    { "title": "M0 Foundations", "description": "Repo, infra, skeleton" },
+    { "title": "M1 Data Layer & Safety", "description": "Schema + RLS + min-cohort" },
+    { "title": "M2 Retrieval & Content", "description": "3 modes + graph + ingestion" },
+    { "title": "M3 Learning Engine", "description": "Learner model + grading + agent" },
+    { "title": "M4 API & Frontend", "description": "Endpoints + student/teacher UI" },
+    { "title": "M5 Data & Production", "description": "Seeder + production data + compliance" },
+    { "title": "M6 Hardening", "description": "Cross-cutting tests, CI, audit" }
+  ],
+  "epics": [
+    { "key": "E1",  "title": "E1 Foundations: Monorepo, Infra, Skeleton", "slug": "E1-foundations",          "milestone": "M0 Foundations",         "doc": "docs/02-foundations.md",                  "labels": ["epic", "type:infra"] },
+    { "key": "E2",  "title": "E2 Database: Schema & Migrationen",         "slug": "E2-database",             "milestone": "M1 Data Layer & Safety", "doc": "docs/03-database.md",                     "labels": ["epic", "area:db"] },
+    { "key": "E3",  "title": "E3 Safety & Isolation (RLS + Min-Cohort)",  "slug": "E3-safety-isolation",     "milestone": "M1 Data Layer & Safety", "doc": "docs/04-safety.md",                       "labels": ["epic", "area:safety", "safety-critical"] },
+    { "key": "E4",  "title": "E4 Retrieval: Router + 3 Modi + Graph",     "slug": "E4-retrieval",            "milestone": "M2 Retrieval & Content", "doc": "docs/05-retrieval.md",                    "labels": ["epic", "area:retrieval"] },
+    { "key": "E5",  "title": "E5 Content-Ingestion (Markdown-Vault)",     "slug": "E5-content-ingestion",    "milestone": "M2 Retrieval & Content", "doc": "docs/05-retrieval.md",                    "labels": ["epic", "area:content"] },
+    { "key": "E6",  "title": "E6 Learner-Modell (BKT)",                   "slug": "E6-learner-model",        "milestone": "M3 Learning Engine",     "doc": "docs/06-learner-model-and-grading.md",   "labels": ["epic", "area:learner-model"] },
+    { "key": "E7",  "title": "E7 Grading-Strategy-Registry",             "slug": "E7-grading",              "milestone": "M3 Learning Engine",     "doc": "docs/06-learner-model-and-grading.md",   "labels": ["epic", "area:grading"] },
+    { "key": "E8",  "title": "E8 Agent-Loop (LangGraph)",                "slug": "E8-agent-loop",           "milestone": "M3 Learning Engine",     "doc": "docs/07-agent.md",                        "labels": ["epic", "area:agent"] },
+    { "key": "E9",  "title": "E9 Backend-API (Student + Teacher)",       "slug": "E9-backend-api",          "milestone": "M4 API & Frontend",      "doc": "docs/08-backend-api.md",                  "labels": ["epic", "area:backend"] },
+    { "key": "E10", "title": "E10 Frontend: Schueler-Session",           "slug": "E10-frontend-student",    "milestone": "M4 API & Frontend",      "doc": "docs/09-frontend.md",                     "labels": ["epic", "area:frontend"] },
+    { "key": "E11", "title": "E11 Frontend: Lehrer-Dashboard",           "slug": "E11-frontend-teacher",    "milestone": "M4 API & Frontend",      "doc": "docs/09-frontend.md",                     "labels": ["epic", "area:frontend"] },
+    { "key": "E12", "title": "E12 Testing & CI",                         "slug": "E12-testing-ci",          "milestone": "M6 Hardening",           "doc": "docs/10-testing.md",                      "labels": ["epic", "type:test"] },
+    { "key": "E13", "title": "E13 Mock-Data-Seeder",                     "slug": "E13-mock-data",           "milestone": "M5 Data & Production",   "doc": "docs/11-mock-data-and-production.md",     "labels": ["epic", "area:data"] },
+    { "key": "E14", "title": "E14 Produktionsdaten & Compliance",        "slug": "E14-production-compliance","milestone": "M5 Data & Production",   "doc": "docs/11-mock-data-and-production.md",     "labels": ["epic", "area:data"] }
+  ],
+  "tasks": [
+    { "key": "FND-1",  "epic": "E1",  "title": "FND-1 Monorepo-Grundgeruest anlegen",                 "milestone": "M0 Foundations",         "labels": ["type:infra", "area:backend"],                                     "deps": [] },
+    { "key": "FND-2",  "epic": "E1",  "title": "FND-2 Python-Projekt mit uv initialisieren",          "milestone": "M0 Foundations",         "labels": ["type:infra", "area:backend"],                                     "deps": ["FND-1"] },
+    { "key": "FND-3",  "epic": "E1",  "title": "FND-3 Docker-Compose: Postgres + pgvector",           "milestone": "M0 Foundations",         "labels": ["type:infra", "area:db"],                                          "deps": ["FND-1"] },
+    { "key": "FND-4",  "epic": "E1",  "title": "FND-4 FastAPI-Skeleton + Healthcheck",                "milestone": "M0 Foundations",         "labels": ["type:feature", "area:backend"],                                   "deps": ["FND-2"] },
+    { "key": "FND-5",  "epic": "E1",  "title": "FND-5 Auth-Rollen-Geruest (student/teacher/admin)",   "milestone": "M0 Foundations",         "labels": ["type:feature", "area:auth"],                                      "deps": ["FND-4"] },
+    { "key": "FND-6",  "epic": "E1",  "title": "FND-6 CI-Grundgeruest (GitHub Actions)",              "milestone": "M0 Foundations",         "labels": ["type:infra", "type:test"],                                        "deps": ["FND-2", "FND-3"] },
+
+    { "key": "DB-1",   "epic": "E2",  "title": "DB-1 Kern-Schema-Migration",                          "milestone": "M1 Data Layer & Safety", "labels": ["type:feature", "area:db", "priority:critical"],                    "deps": ["FND-3"] },
+    { "key": "DB-2",   "epic": "E2",  "title": "DB-2 SQLAlchemy-Modelle",                             "milestone": "M1 Data Layer & Safety", "labels": ["type:feature", "area:db"],                                        "deps": ["DB-1"] },
+    { "key": "DB-3",   "epic": "E2",  "title": "DB-3 Session-/Engine-Setup mit Rollen-Hook",          "milestone": "M1 Data Layer & Safety", "labels": ["type:feature", "area:db", "safety-critical"],                      "deps": ["DB-2"] },
+    { "key": "DB-4",   "epic": "E2",  "title": "DB-4 Skill-Graph-Seed (Fach Mathematik, Demo)",       "milestone": "M1 Data Layer & Safety", "labels": ["type:feature", "area:db", "good-first-issue"],                     "deps": ["DB-1"] },
+
+    { "key": "SAF-1",  "epic": "E3",  "title": "SAF-1 RLS-Policies (Schueler sieht nur eigene Zeilen)","milestone": "M1 Data Layer & Safety","labels": ["type:feature", "area:safety", "priority:critical", "safety-critical"], "deps": ["DB-3"] },
+    { "key": "SAF-2",  "epic": "E3",  "title": "SAF-2 Scoping-Resolver",                              "milestone": "M1 Data Layer & Safety", "labels": ["type:feature", "area:safety", "safety-critical"],                  "deps": ["SAF-1", "FND-5"] },
+    { "key": "SAF-3",  "epic": "E3",  "title": "SAF-3 Min-Cohort-Schwelle fuer Aggregate",            "milestone": "M1 Data Layer & Safety", "labels": ["type:feature", "area:safety", "safety-critical"],                  "deps": ["DB-3"] },
+    { "key": "SAF-4",  "epic": "E3",  "title": "SAF-4 Safety-Tests (CI-blockierend)",                 "milestone": "M1 Data Layer & Safety", "labels": ["type:test", "area:safety", "priority:critical", "safety-critical"], "deps": ["SAF-1", "SAF-2", "SAF-3"] },
+
+    { "key": "RET-1",  "epic": "E4",  "title": "RET-1 Retrieval-Router",                              "milestone": "M2 Retrieval & Content", "labels": ["type:feature", "area:retrieval"],                                 "deps": ["SAF-2", "SAF-3"] },
+    { "key": "RET-2",  "epic": "E4",  "title": "RET-2 Semantic-Modus (pgvector)",                     "milestone": "M2 Retrieval & Content", "labels": ["type:feature", "area:retrieval"],                                 "deps": ["DB-2", "CON-2"] },
+    { "key": "RET-3",  "epic": "E4",  "title": "RET-3 Individual-Modus (scoped)",                     "milestone": "M2 Retrieval & Content", "labels": ["type:feature", "area:retrieval", "safety-critical"],               "deps": ["SAF-2"] },
+    { "key": "RET-4",  "epic": "E4",  "title": "RET-4 Population-Modus (Aggregate)",                  "milestone": "M2 Retrieval & Content", "labels": ["type:feature", "area:retrieval", "safety-critical"],               "deps": ["SAF-3"] },
+    { "key": "RET-5",  "epic": "E4",  "title": "RET-5 Graph-Traversal (rekursive CTE)",               "milestone": "M2 Retrieval & Content", "labels": ["type:feature", "area:retrieval"],                                 "deps": ["DB-2"] },
+
+    { "key": "CON-1",  "epic": "E5",  "title": "CON-1 Markdown-Parser (Prosa/Code-Split)",            "milestone": "M2 Retrieval & Content", "labels": ["type:feature", "area:content"],                                   "deps": ["FND-2"] },
+    { "key": "CON-2",  "epic": "E5",  "title": "CON-2 Ingestion-Pipeline (Embeddings)",               "milestone": "M2 Retrieval & Content", "labels": ["type:feature", "area:content"],                                   "deps": ["CON-1", "DB-2"] },
+    { "key": "CON-3",  "epic": "E5",  "title": "CON-3 Demo-Vault",                                    "milestone": "M2 Retrieval & Content", "labels": ["type:docs", "area:content", "good-first-issue"],                   "deps": [] },
+
+    { "key": "LM-1",   "epic": "E6",  "title": "LM-1 BKT-Kern",                                       "milestone": "M3 Learning Engine",     "labels": ["type:feature", "area:learner-model"],                             "deps": ["FND-2"] },
+    { "key": "LM-2",   "epic": "E6",  "title": "LM-2 Tracing-Service",                                "milestone": "M3 Learning Engine",     "labels": ["type:feature", "area:learner-model"],                             "deps": ["LM-1", "DB-2"] },
+    { "key": "LM-3",   "epic": "E6",  "title": "LM-3 DKT-Platzhalter",                                "milestone": "M3 Learning Engine",     "labels": ["type:docs", "area:learner-model"],                                "deps": ["LM-2"] },
+
+    { "key": "GR-1",   "epic": "E7",  "title": "GR-1 GraderStrategy-Protokoll + Registry",            "milestone": "M3 Learning Engine",     "labels": ["type:feature", "area:grading"],                                   "deps": ["FND-2"] },
+    { "key": "GR-2",   "epic": "E7",  "title": "GR-2 Math-Grader (symbolisch/numerisch)",             "milestone": "M3 Learning Engine",     "labels": ["type:feature", "area:grading", "priority:critical"],               "deps": ["GR-1"] },
+    { "key": "GR-3",   "epic": "E7",  "title": "GR-3 Language- & History-Grader (Grundgeruest)",      "milestone": "M3 Learning Engine",     "labels": ["type:feature", "area:grading"],                                   "deps": ["GR-1"] },
+
+    { "key": "AG-1",   "epic": "E8",  "title": "AG-1 LangGraph-State + Graph",                        "milestone": "M3 Learning Engine",     "labels": ["type:feature", "area:agent"],                                     "deps": ["RET-1", "LM-2", "GR-1"] },
+    { "key": "AG-2",   "epic": "E8",  "title": "AG-2 Nodes (route/retrieve/assess/update_model/explain)","milestone": "M3 Learning Engine",  "labels": ["type:feature", "area:agent"],                                     "deps": ["AG-1"] },
+    { "key": "AG-3",   "epic": "E8",  "title": "AG-3 LLM-Client + Anonymisierung",                    "milestone": "M3 Learning Engine",     "labels": ["type:feature", "area:llm", "safety-critical"],                     "deps": ["FND-4"] },
+
+    { "key": "API-1",  "epic": "E9",  "title": "API-1 Student-Endpoints",                             "milestone": "M4 API & Frontend",      "labels": ["type:feature", "area:backend", "safety-critical"],                 "deps": ["AG-1", "SAF-2"] },
+    { "key": "API-2",  "epic": "E9",  "title": "API-2 Teacher-Endpoints",                             "milestone": "M4 API & Frontend",      "labels": ["type:feature", "area:backend", "safety-critical"],                 "deps": ["API-1", "RET-4"] },
+    { "key": "API-3",  "epic": "E9",  "title": "API-3 Pydantic-Schemas + Fehlermodell",               "milestone": "M4 API & Frontend",      "labels": ["type:feature", "area:backend"],                                   "deps": ["FND-4"] },
+
+    { "key": "FE-S1",  "epic": "E10", "title": "FE-S1 React/TS-Projekt-Setup",                        "milestone": "M4 API & Frontend",      "labels": ["type:infra", "area:frontend"],                                    "deps": ["FND-1"] },
+    { "key": "FE-S2",  "epic": "E10", "title": "FE-S2 Session-Screen",                                "milestone": "M4 API & Frontend",      "labels": ["type:feature", "area:frontend"],                                  "deps": ["FE-S1", "API-1"] },
+    { "key": "FE-S3",  "epic": "E10", "title": "FE-S3 Helfer-Aktionen (explain/hint/why)",            "milestone": "M4 API & Frontend",      "labels": ["type:feature", "area:frontend"],                                  "deps": ["FE-S2"] },
+
+    { "key": "FE-T1",  "epic": "E11", "title": "FE-T1 Dashboard-Shell",                               "milestone": "M4 API & Frontend",      "labels": ["type:feature", "area:frontend"],                                  "deps": ["FE-S1", "API-2"] },
+    { "key": "FE-T2",  "epic": "E11", "title": "FE-T2 Learner-Model-Panel (Open Learner Model)",      "milestone": "M4 API & Frontend",      "labels": ["type:feature", "area:frontend"],                                  "deps": ["FE-T1", "API-2"] },
+    { "key": "FE-T3",  "epic": "E11", "title": "FE-T3 Interventions-Steuerung",                       "milestone": "M4 API & Frontend",      "labels": ["type:feature", "area:frontend"],                                  "deps": ["FE-T2"] },
+
+    { "key": "TST-1",  "epic": "E12", "title": "TST-1 Pytest-Fixtures (DB pro Test, Rollen)",         "milestone": "M6 Hardening",           "labels": ["type:test"],                                                      "deps": ["FND-6", "DB-3"] },
+    { "key": "TST-2",  "epic": "E12", "title": "TST-2 Unit-Tests Lernmodell & Grading",               "milestone": "M6 Hardening",           "labels": ["type:test", "area:learner-model", "area:grading"],                 "deps": ["LM-1", "GR-2"] },
+    { "key": "TST-3",  "epic": "E12", "title": "TST-3 Integrationstests Agent-Loop",                  "milestone": "M6 Hardening",           "labels": ["type:test", "area:agent"],                                        "deps": ["AG-2"] },
+    { "key": "TST-4",  "epic": "E12", "title": "TST-4 E2E Smoke (API + Frontend)",                    "milestone": "M6 Hardening",           "labels": ["type:test", "area:frontend", "area:backend"],                      "deps": ["API-2", "FE-T2"] },
+
+    { "key": "MOCK-1", "epic": "E13", "title": "MOCK-1 Seeder-CLI",                                   "milestone": "M5 Data & Production",   "labels": ["type:feature", "area:data"],                                      "deps": ["DB-2", "LM-2"] },
+    { "key": "MOCK-2", "epic": "E13", "title": "MOCK-2 Realistische Lernkurven",                      "milestone": "M5 Data & Production",   "labels": ["type:feature", "area:data"],                                      "deps": ["MOCK-1"] },
+    { "key": "MOCK-3", "epic": "E13", "title": "MOCK-3 Reset/Teardown",                               "milestone": "M5 Data & Production",   "labels": ["type:feature", "area:data"],                                      "deps": ["MOCK-1"] },
+
+    { "key": "PROD-1", "epic": "E14", "title": "PROD-1 Produktiver Ingestion-Pfad",                   "milestone": "M5 Data & Production",   "labels": ["type:feature", "area:data"],                                      "deps": ["CON-2", "DB-2"] },
+    { "key": "PROD-2", "epic": "E14", "title": "PROD-2 Env-Toggle Mock/Prod + Guards",               "milestone": "M5 Data & Production",   "labels": ["type:feature", "area:data", "safety-critical"],                    "deps": ["MOCK-1", "PROD-1"] },
+    { "key": "PROD-3", "epic": "E14", "title": "PROD-3 Datenresidenz & Retention",                    "milestone": "M5 Data & Production",   "labels": ["type:docs", "area:data", "priority:critical"],                     "deps": [] }
+  ]
+}

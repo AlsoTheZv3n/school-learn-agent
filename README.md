@@ -65,6 +65,28 @@ copy-paste-fähiger Auftrag, der dieses eine Arbeitspaket abgeschlossen umsetzt.
 
 ---
 
+## Detailplanung & GitHub-Struktur (ergänzt)
+
+Aufbauend auf den 13 Foundation-Dokumenten (00–11) liegt eine **Detailplanungs-Ebene** bei:
+
+| Was | Wo |
+|---|---|
+| Pro-Epic-Detailplanung (Scope, Sub-Tasks, Designentscheidungen, Risiken, offene Fragen) | [`docs/planning/`](docs/planning/) |
+| Konsolidierte offene Fragen & Risiken (89 Entscheidungen, 102 Risiken) | [`docs/planning/open-questions-and-risks.md`](docs/planning/open-questions-and-risks.md) |
+| Pro-Task-Issue-Bodies (eigenständig umsetzbar, je 1 `.md` pro Task) | [`docs/issues/`](docs/issues/) |
+| Maschinenlesbare Issue-/Label-/Milestone-Definition | [`scripts/issues.manifest.json`](scripts/issues.manifest.json) |
+| Idempotentes GitHub-Bootstrap (Labels → Milestones → Epics → 50 Sub-Issues) | [`scripts/bootstrap_github.ps1`](scripts/bootstrap_github.ps1) · [`.sh`](scripts/bootstrap_github.sh) |
+
+Die GitHub-Issues (14 Epics als Tracking-Issues + 50 Task-Issues als native Sub-Issues, Milestones M0–M6) werden aus dem Manifest erzeugt:
+
+```bash
+gh auth login                       # einmalig
+pwsh scripts/bootstrap_github.ps1   # Windows/pwsh
+bash scripts/bootstrap_github.sh    # Linux/CI (benötigt jq)
+```
+
+---
+
 ## Compliance-Hinweis
 
 Diese Plattform verarbeitet identifizierbare Daten über **Minderjährige**. Datenresidenz
