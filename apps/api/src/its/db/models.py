@@ -48,6 +48,7 @@ class Student(Base):
     id: Mapped[uuid.UUID] = _uuid_pk()
     display_name: Mapped[str] = mapped_column(String, nullable=False)
     grade_level: Mapped[int] = mapped_column(Integer, nullable=False)
+    external_id: Mapped[str | None] = mapped_column(String, unique=True)  # prod upsert key
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -64,6 +65,7 @@ class Class(Base):
     id: Mapped[uuid.UUID] = _uuid_pk()
     name: Mapped[str] = mapped_column(String, nullable=False)
     teacher_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("teachers.id"))
+    external_id: Mapped[str | None] = mapped_column(String, unique=True)  # prod upsert key
 
     teacher: Mapped["Teacher | None"] = relationship()
 
