@@ -70,6 +70,31 @@ def as_role(engine: Engine):
     return _as
 
 
+class DBFactory:
+    """Opens role-scoped sessions — a test mirror of db/session.py:scoped_session (TST-1).
+
+    Lets a test run exactly under its_student / its_teacher / its_admin so the RLS
+    policies are exercised through the same role + set_config mechanism as production.
+    """
+
+    def __init__(self, engine: Engine) -> None:
+        self._engine = engine
+
+    def as_student(self, student_id=None):
+        return role_conn(self._engine, "its_student", student_id=student_id)
+
+    def as_teacher(self, teacher_id):
+        return role_conn(self._engine, "its_teacher", teacher_id=teacher_id)
+
+    def as_admin(self):
+        return role_conn(self._engine, "its_admin")
+
+
+@pytest.fixture
+def db_factory(engine: Engine) -> DBFactory:
+    return DBFactory(engine)
+
+
 @pytest.fixture
 def seeded_rls(engine: Engine):
     """Commit an isolated RLS scenario as the owner role, yield ids, then clean up.
