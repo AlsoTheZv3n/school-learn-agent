@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Detail - Open Learner Model - EduSovereign</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2f3034",
+                    "primary-container": "#2d4c7e",
+                    "on-secondary-fixed-variant": "#004f52",
+                    "surface-bright": "#faf9fe",
+                    "error-container": "#ffdad6",
+                    "outline": "#747780",
+                    "inverse-on-surface": "#f1f0f5",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#d7e3ff",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "on-background": "#1a1b1f",
+                    "secondary-fixed": "#9ef0f3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#2a1700",
+                    "on-tertiary-container": "#ffab31",
+                    "inverse-primary": "#aac7ff",
+                    "on-surface-variant": "#43474f",
+                    "surface": "#faf9fe",
+                    "tertiary": "#4d2f00",
+                    "tertiary-fixed": "#ffddb8",
+                    "on-secondary-fixed": "#002021",
+                    "secondary-container": "#9beef0",
+                    "on-surface": "#1a1b1f",
+                    "surface-dim": "#dad9de",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#82d4d7",
+                    "surface-container-low": "#f4f3f8",
+                    "surface-variant": "#e3e2e7",
+                    "primary-fixed-dim": "#aac7ff",
+                    "on-primary-container": "#a0bdf7",
+                    "on-primary-fixed-variant": "#274778",
+                    "surface-container-high": "#e8e7ec",
+                    "on-secondary": "#ffffff",
+                    "primary": "#113566",
+                    "outline-variant": "#c4c6d0",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#405e92",
+                    "secondary": "#00696c",
+                    "surface-container-highest": "#e3e2e7",
+                    "tertiary-container": "#6c4300",
+                    "on-primary-fixed": "#001b3e",
+                    "surface-container": "#eeedf2",
+                    "background": "#faf9fe",
+                    "on-secondary-container": "#016e71",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "unit": "4px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "container-margin": "24px",
+                    "lg": "24px",
+                    "teacher-density-multiplier": "0.75"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "display-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "caption": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "title-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-sm": [
+                            "Plus Jakarta Sans"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "caption": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "title-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "500"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden lg:flex flex-col w-64 h-screen p-md gap-sm bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant/10 sticky left-0 top-0 z-40">
+<div class="flex items-center gap-sm mb-lg px-sm">
+<img alt="School Logo" class="w-8 h-8 rounded-full" data-alt="A clean, minimalist abstract logo design featuring intersecting geometric shapes in muted indigo and teal, representing an educational institution, set against a solid white background with soft, diffused lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBokzWbxkxgLP5r16bDnr1CTEaNyRY56DtgtK5C-g-_jLzV96MsMnWJr7YNlt1L0g_fMlAoPwZls6m8XLcG8xL1mkVE4uhnrOEe3Sqpq_eznt4yf8aSkdJprfz3GiT-3-x2itLJNl3b5y6nV5wCw6imVbwiNeL0q6CWZWAvwnjUJ18wv5nEmysYWS8MmMQX2wVzhvAPF0Q_f6f2KjMQ9VaNdP7drj_6Ke_W36TbdrXBEXxcWy2b9cqu1gtkiQFFyfhAWRHq386Did4F"/>
+<div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Institution Portal</div>
+<div class="font-caption text-caption text-on-surface-variant">Teacher View</div>
+</div>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-sm p-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg text-secondary dark:text-secondary-fixed-dim font-bold border-l-4 border-secondary opacity-80 bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-sm text-label-sm">Classes</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Mastery Heatmap</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-label-sm text-label-sm">AI Insights</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</div>
+<div class="mt-auto border-t border-outline-variant/20 pt-sm">
+<a class="flex items-center gap-sm p-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+<span class="font-label-sm text-label-sm">Privacy Center</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar (Responsive) -->
+<header class="flex justify-between items-center px-gutter md:px-xl w-full sticky top-0 z-50 bg-surface dark:bg-inverse-surface shadow-[0px_4px_20px_rgba(45,76,126,0.08)] py-sm h-16">
+<div class="flex items-center gap-sm lg:hidden">
+<button class="text-primary p-xs rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">EduSovereign</div>
+</div>
+<div class="hidden lg:block font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">EduSovereign</div>
+<div class="flex items-center gap-sm text-primary dark:text-primary-fixed-dim">
+<button class="p-xs rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined" data-icon="security">security</span></button>
+<button class="p-xs rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-xs rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
+</header>
+<div class="flex-1 overflow-auto p-gutter md:p-xl bg-surface-container-lowest">
+<!-- Header: Student Info -->
+<div class="mb-lg">
+<div class="flex items-start justify-between flex-wrap gap-md">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">arrow_back</span></a>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Lukas Schmidt</h1>
+<span class="bg-surface-container-high px-sm py-xs rounded-md font-label-sm text-label-sm text-on-surface-variant border border-outline-variant/30">Grade 8</span>
+<span class="bg-surface-container-high px-sm py-xs rounded-md font-label-sm text-label-sm text-on-surface-variant border border-outline-variant/30">Class 8B (Math)</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Last active: Today, 09:42 AM
+                        </p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-lg">
+<!-- Left Column: Open Learner Model (Dense) -->
+<div class="xl:col-span-2 flex flex-col gap-md">
+<h2 class="font-title-md text-title-md text-on-surface border-b border-outline-variant/20 pb-xs">Mastery Profile (Open Learner Model)</h2>
+<!-- Mastery Table Container -->
+<div class="bg-surface rounded-xl border border-outline-variant/10 shadow-[0px_4px_20px_rgba(45,76,126,0.08)] overflow-hidden">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-sm p-sm border-b border-outline-variant/20 bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant">
+<div class="col-span-4">Skill Topic</div>
+<div class="col-span-5">Mastery Estimate &amp; Uncertainty</div>
+<div class="col-span-2 text-center">Attempts</div>
+<div class="col-span-1 text-center">Trend</div>
+</div>
+<!-- Row 1: Fractions (Expanded) -->
+<div class="border-b border-outline-variant/10 bg-surface-bright">
+<!-- Main Row -->
+<div class="grid grid-cols-12 gap-sm p-sm items-center cursor-pointer hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 flex items-center gap-xs font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant transition-transform rotate-90">chevron_right</span>
+                                    Adding Fractions (Unlike Denominators)
+                                </div>
+<div class="col-span-5 flex items-center gap-sm">
+<div class="flex-1 h-3 bg-surface-container-high rounded-full relative overflow-hidden">
+<!-- Uncertainty Band -->
+<div class="absolute top-0 bottom-0 left-[65%] w-[15%] bg-secondary/20 rounded-full"></div>
+<!-- Main Mastery Line -->
+<div class="absolute top-0 bottom-0 left-0 w-[72%] bg-gradient-to-r from-primary-container to-secondary rounded-full"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface w-12 text-right">72%</span>
+</div>
+<div class="col-span-2 text-center font-body-md text-body-md text-on-surface-variant">24</div>
+<div class="col-span-1 text-center flex justify-center">
+<span class="material-symbols-outlined text-secondary text-[20px]">trending_up</span>
+</div>
+</div>
+<!-- Expanded "Warum?" Panel -->
+<div class="p-md bg-surface-container-low/50 border-t border-outline-variant/10 pl-10">
+<h3 class="font-label-sm text-label-sm text-primary mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+                                    AI Estimate Explanation
+                                </h3>
+<p class="font-body-sm text-sm text-on-surface-variant mb-md bg-surface p-sm rounded-lg border border-outline-variant/20">
+                                    Lukas has shown consistent improvement in finding the least common multiple, but occasionally struggles with simplifying the final result. The uncertainty band (±7.5%) reflects varied performance in simplification steps during the last 5 exercises.
+                                </p>
+<h4 class="font-label-sm text-label-sm text-on-surface mb-xs">Recent Attempts Timeline</h4>
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-sm p-xs bg-surface rounded border border-outline-variant/10 text-sm">
+<span class="material-symbols-outlined text-error text-[16px]">close</span>
+<span class="text-on-surface-variant w-16">10:15 AM</span>
+<span class="text-on-surface font-mono flex-1">1/3 + 2/5 = ?</span>
+<span class="text-on-surface-variant w-24 text-right">Ans: 11/15 (Simp. Err)</span>
+</div>
+<div class="flex items-center gap-sm p-xs bg-surface rounded border border-outline-variant/10 text-sm">
+<span class="material-symbols-outlined text-secondary text-[16px]">check</span>
+<span class="text-on-surface-variant w-16">10:12 AM</span>
+<span class="text-on-surface font-mono flex-1">1/4 + 1/2 = ?</span>
+<span class="text-on-surface-variant w-24 text-right">Ans: 3/4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Algebra (Collapsed) -->
+<div class="border-b border-outline-variant/10 bg-surface">
+<div class="grid grid-cols-12 gap-sm p-sm items-center cursor-pointer hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 flex items-center gap-xs font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant transition-transform group-hover:text-primary">chevron_right</span>
+                                    Solving Linear Equations (1 Var)
+                                </div>
+<div class="col-span-5 flex items-center gap-sm">
+<div class="flex-1 h-3 bg-surface-container-high rounded-full relative overflow-hidden">
+<div class="absolute top-0 bottom-0 left-[85%] w-[8%] bg-secondary/20 rounded-full"></div>
+<div class="absolute top-0 bottom-0 left-0 w-[89%] bg-gradient-to-r from-primary-container to-secondary rounded-full"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface w-12 text-right">89%</span>
+</div>
+<div class="col-span-2 text-center font-body-md text-body-md text-on-surface-variant">42</div>
+<div class="col-span-1 text-center flex justify-center">
+<span class="material-symbols-outlined text-outline text-[20px]">trending_flat</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Prerequisite Graph Placeholder -->
+<div class="mt-md bg-surface rounded-xl border border-outline-variant/10 shadow-[0px_4px_20px_rgba(45,76,126,0.08)] p-md">
+<h3 class="font-title-md text-title-md text-on-surface mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+                            Knowledge Graph: Missing Prerequisites
+                        </h3>
+<div class="h-48 bg-surface-container-lowest border border-outline-variant/20 rounded-lg flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(#e3e2e7_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+<div class="relative z-10 flex items-center gap-xl">
+<div class="flex flex-col items-center gap-xs">
+<div class="w-32 p-xs text-center border-2 border-error text-error bg-error-container/20 rounded-md font-label-sm text-label-sm">Simplifying Fractions</div>
+<span class="text-[10px] text-outline">Prerequisite (Low Mastery)</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">arrow_right_alt</span>
+<div class="w-32 p-xs text-center border-2 border-primary text-primary bg-primary-container/10 rounded-md font-label-sm text-label-sm">Adding Unlike Denominators</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Intervention Panel -->
+<div class="xl:col-span-1">
+<div class="bg-surface rounded-xl border border-outline-variant/10 shadow-[0px_4px_20px_rgba(45,76,126,0.08)] p-md sticky top-24">
+<h2 class="font-title-md text-title-md text-on-surface mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">build</span>
+                            Teacher Intervention
+                        </h2>
+<!-- Follow-up Toggle -->
+<label class="flex items-center justify-between p-sm bg-surface-container-low rounded-lg mb-md cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary-container">flag</span>
+<span class="font-label-sm text-label-sm text-on-surface">Für Follow-up markieren</span>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-surface-container-highest appearance-none cursor-pointer transition-transform duration-200 ease-in-out" id="toggle1" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary cursor-pointer" for="toggle1"></label>
+</div>
+<style>
+                                .toggle-checkbox:checked { right: 0; border-color: #113566; }
+                                .toggle-checkbox:checked + .toggle-label { background-color: #113566; }
+                                .toggle-checkbox { right: 1.25rem; z-index: 1; border-color: #e3e2e7; }
+                                .toggle-label { background-color: #e3e2e7; }
+                            </style>
+</label>
+<!-- Student Note -->
+<div class="mb-md">
+<label class="block font-label-sm text-label-sm text-on-surface mb-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">chat_bubble</span>
+                                Note for Student <span class="text-xs text-on-surface-variant font-normal">(erscheint beim Schüler)</span>
+</label>
+<textarea class="w-full h-24 p-sm border border-outline-variant/50 rounded-lg bg-surface-bright focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md resize-none" placeholder="E.g., Great effort! Let's review simplification together next class."></textarea>
+</div>
+<!-- Override Mastery (Audited) -->
+<div class="border-t border-outline-variant/20 pt-md">
+<label class="block font-label-sm text-label-sm text-on-surface mb-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+                                Override Mastery Estimate <span class="text-xs text-on-surface-variant font-normal">(Audited)</span>
+</label>
+<p class="font-caption text-caption text-on-surface-variant mb-sm leading-tight">Adjust the AI estimate based on in-class observation. This action is logged for transparency.</p>
+<div class="flex items-center gap-sm mb-sm">
+<input class="w-20 p-xs border border-outline-variant/50 rounded-md bg-surface-bright text-center text-body-md font-body-md focus:outline-none focus:border-primary" max="100" min="0" type="number" value="72"/>
+<span class="text-on-surface-variant">%</span>
+</div>
+<textarea class="w-full h-16 p-sm border border-outline-variant/50 rounded-lg bg-surface-bright focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm resize-none mb-sm" placeholder="Reason for override (Required)..."></textarea>
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-sm text-label-sm hover:bg-primary/90 transition-colors">Save Intervention</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-md pb-safe bg-surface-container-lowest dark:bg-inverse-surface rounded-t-xl shadow-[0px_-4px_20px_rgba(45,76,126,0.08)] py-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-sm hover:bg-surface-container-high transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-sm text-label-sm mt-1">Learn</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-sm scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_graph" style="font-variation-settings: 'FILL' 1;">auto_graph</span>
+<span class="font-label-sm text-label-sm mt-1">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-sm hover:bg-surface-container-high transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-sm text-label-sm mt-1">Tutor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-sm hover:bg-surface-container-high transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

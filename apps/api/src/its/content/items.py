@@ -36,3 +36,12 @@ def load_item(item_ref: str) -> Item:
         return _CURATED[item_ref]
     except KeyError as e:
         raise LookupError(f"no curated item '{item_ref}'") from e
+
+
+def public_items(skill_key: str | None = None) -> list[dict]:
+    """Items WITHOUT the answer_key — safe to send to a student's browser."""
+    return [
+        {"item_ref": ref, "prompt": item.prompt, "skill_key": item.skill_key, "subject_key": item.subject_key}
+        for ref, item in _CURATED.items()
+        if skill_key is None or item.skill_key == skill_key
+    ]

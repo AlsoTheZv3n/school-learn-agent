@@ -22,6 +22,8 @@ GRANT its_student, its_teacher, its_admin TO its;
 -- ── Table grants (RLS narrows further, row by row) ────────────────────────────
 GRANT SELECT, INSERT, UPDATE ON attempts, learner_state TO its_student, its_teacher;
 GRANT SELECT, INSERT, UPDATE, DELETE ON teacher_notes TO its_teacher;
+-- students may READ notes about themselves (paired with student_notes_about_self policy)
+GRANT SELECT ON teacher_notes TO its_student;
 -- classes added (vs docs/04): the teacher *_in_class policies join classes.
 GRANT SELECT ON enrollments, classes, skills, subjects, skill_edges, content_notes, content_embeddings
   TO its_student, its_teacher;

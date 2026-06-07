@@ -13,7 +13,7 @@ import sys
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session, sessionmaker
 
-from its.db.models import Attempt, Class, Enrollment, Student
+from its.db.models import Attempt, Class, Enrollment, Student, Teacher
 from its.learner_model.tracing import record_attempt
 
 _DEMO_STUDENTS = 25
@@ -72,13 +72,18 @@ def seed(
     """Seed classes/students/attempts + derived learner_state. Returns created ids."""
     rng = rng or random.Random()
     skills = ensure_curriculum(session)
-    created: dict[str, list] = {"classes": [], "students": []}
+    created: dict = {"classes": [], "students": [], "teacher": None}
     if profile == "empty":
         return created
     n_classes = 1 if profile == "demo" else classes
     n_students = _DEMO_STUDENTS if profile == "demo" else students_per_class
+    # One demo teacher owns all seeded classes (so the teacher view has data).
+    teacher = Teacher(display_name="Demo-Lehrperson")
+    session.add(teacher)
+    session.flush()
+    created["teacher"] = teacher.id
     for ci in range(n_classes):
-        klass = Class(name=f"Demo-Klasse {ci + 1}")
+        klass = Class(name=f"Demo-Klasse {ci + 1}", teacher_id=teacher.id)
         session.add(klass)
         session.flush()
         created["classes"].append(klass.id)

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduSovereign - Heute</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#2f3034",
+                      "primary-container": "#2d4c7e",
+                      "on-secondary-fixed-variant": "#004f52",
+                      "surface-bright": "#faf9fe",
+                      "error-container": "#ffdad6",
+                      "outline": "#747780",
+                      "inverse-on-surface": "#f1f0f5",
+                      "tertiary-fixed-dim": "#ffb95f",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#d7e3ff",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "on-background": "#1a1b1f",
+                      "secondary-fixed": "#9ef0f3",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed": "#2a1700",
+                      "on-tertiary-container": "#ffab31",
+                      "inverse-primary": "#aac7ff",
+                      "on-surface-variant": "#43474f",
+                      "surface": "#faf9fe",
+                      "tertiary": "#4d2f00",
+                      "tertiary-fixed": "#ffddb8",
+                      "on-secondary-fixed": "#002021",
+                      "secondary-container": "#9beef0",
+                      "on-surface": "#1a1b1f",
+                      "surface-dim": "#dad9de",
+                      "on-error": "#ffffff",
+                      "error": "#ba1a1a",
+                      "secondary-fixed-dim": "#82d4d7",
+                      "surface-container-low": "#f4f3f8",
+                      "surface-variant": "#e3e2e7",
+                      "primary-fixed-dim": "#aac7ff",
+                      "on-primary-container": "#a0bdf7",
+                      "on-primary-fixed-variant": "#274778",
+                      "surface-container-high": "#e8e7ec",
+                      "on-secondary": "#ffffff",
+                      "primary": "#113566",
+                      "outline-variant": "#c4c6d0",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#405e92",
+                      "secondary": "#00696c",
+                      "surface-container-highest": "#e3e2e7",
+                      "tertiary-container": "#6c4300",
+                      "on-primary-fixed": "#001b3e",
+                      "surface-container": "#eeedf2",
+                      "background": "#faf9fe",
+                      "on-secondary-container": "#016e71",
+                      "on-tertiary": "#ffffff",
+                      "info-blue": "#005cbb",
+                      "warning-amber": "#6a3e00",
+                      "warning-amber-container": "#ffdcbe"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "2xl": "1.25rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "gutter": "16px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "container-margin": "24px",
+                      "lg": "24px",
+                      "teacher-density-multiplier": "0.75"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Plus Jakarta Sans"],
+                      "body-lg": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "caption": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"],
+                      "title-md": ["Plus Jakarta Sans"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "label-sm": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "caption": ["12px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-sm": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "500"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shadow-ambient {
+            box-shadow: 0px 4px 20px rgba(45, 76, 126, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-inverse-surface shadow-sm shadow-[0px_4px_20px_rgba(45,76,126,0.08)] flex justify-between items-center px-gutter md:px-xl w-full sticky top-0 z-50 py-md">
+<div class="flex items-center gap-xl">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">EduSovereign</h1>
+<!-- Requested Top Nav Links for Desktop -->
+<nav class="hidden lg:flex items-center gap-lg">
+<a class="font-title-md text-title-md text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1 hover:text-primary transition-colors hover:scale-95 duration-150" href="#">Heute</a>
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary transition-colors hover:scale-95 duration-150" href="#">Lernen</a>
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary transition-colors hover:scale-95 duration-150" href="#">Mein Fortschritt</a>
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary transition-colors hover:scale-95 duration-150" href="#">Bibliothek</a>
+<a class="font-title-md text-title-md text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary transition-colors hover:scale-95 duration-150" href="#">Notizen</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm md:gap-md">
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">security</span>
+</button>
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container-low relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas (Student View: Centered, Max Width ~1024px, Spaced out) -->
+<main class="flex-1 w-full max-w-[1024px] mx-auto px-gutter md:px-xl py-xl flex flex-col gap-xl pb-32 lg:pb-xl">
+<!-- Dismissible Banner -->
+<div class="w-full bg-warning-amber-container text-warning-amber rounded-xl p-md flex items-center justify-between shadow-ambient" id="teacher-banner">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined filled text-warning-amber">campaign</span>
+<p class="font-body-md font-medium">Notiz von Frau Meier: Schön, dass du dranbleibst!</p>
+</div>
+<button class="text-warning-amber hover:opacity-70 transition-opacity" onclick="document.getElementById('teacher-banner').style.display='none'">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Greeting -->
+<section class="mt-sm">
+<h2 class="font-display-lg text-display-lg text-primary tracking-tight">Hallo Mia 👋</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-sm max-w-2xl">Lass uns dort weitermachen, wo du aufgehört hast. Ein bisschen Übung jeden Tag macht den Meister.</p>
+</section>
+<!-- Top Bento Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Weiterlernen (Large Card) -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-2xl p-xl shadow-ambient border border-outline-variant/10 flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300">
+<div>
+<div class="flex items-center gap-sm text-secondary mb-md">
+<span class="material-symbols-outlined filled text-secondary">functions</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Mathematik</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-sm">Quadratische Ergänzung</h3>
+<p class="font-body-md text-on-surface-variant mb-xl">Löse Gleichungen, indem du einen quadratischen Term vervollständigst.</p>
+</div>
+<div>
+<div class="flex justify-between items-end mb-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dein Fortschritt in diesem Modul</span>
+<span class="font-title-md text-title-md text-primary">65%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-3 mb-xl overflow-hidden relative">
+<div class="bg-gradient-to-r from-secondary to-primary h-3 rounded-full" style="width: 65%;"></div>
+</div>
+<button class="w-full md:w-auto bg-primary text-on-primary font-title-md text-title-md py-md px-xl rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-colors flex items-center justify-center gap-sm">
+                        Weiterlernen
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Heutiges Ziel (Side Card) -->
+<div class="bg-surface-container-lowest rounded-2xl p-xl shadow-ambient border border-outline-variant/10 flex flex-col items-center justify-center text-center hover:-translate-y-1 transition-transform duration-300">
+<h3 class="font-title-md text-title-md text-primary mb-lg w-full text-left">Heutiges Ziel</h3>
+<!-- Simple CSS Progress Ring -->
+<div class="relative w-32 h-32 flex items-center justify-center mb-md">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<!-- Background Circle -->
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<!-- Progress Circle -->
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined filled text-secondary text-3xl">star</span>
+</div>
+</div>
+<p class="font-title-md text-title-md text-primary">Geschafft!</p>
+<p class="font-body-md text-on-surface-variant mt-xs">1 von 1 Konzept geübt</p>
+</div>
+</section>
+<!-- Deine Fächer -->
+<section>
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-headline-lg text-headline-lg text-primary md:text-headline-lg-mobile">Deine Fächer</h3>
+<a class="font-label-sm text-label-sm text-secondary hover:underline" href="#">Alle ansehen</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Fach Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/10 flex items-center gap-md hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined">calculate</span>
+</div>
+<div class="flex-1">
+<h4 class="font-title-md text-title-md text-primary">Mathematik</h4>
+<div class="flex items-center gap-sm mt-xs">
+<div class="flex-1 bg-surface-container-high rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 78%;"></div>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">78%</span>
+</div>
+</div>
+</div>
+<!-- Fach Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/10 flex items-center gap-md hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div class="flex-1">
+<h4 class="font-title-md text-title-md text-primary">Sprache</h4>
+<div class="flex items-center gap-sm mt-xs">
+<div class="flex-1 bg-surface-container-high rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 45%;"></div>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">45%</span>
+</div>
+</div>
+</div>
+<!-- Fach Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/10 flex items-center gap-md hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<div class="flex-1">
+<h4 class="font-title-md text-title-md text-primary">Geschichte</h4>
+<div class="flex items-center gap-sm mt-xs">
+<div class="flex-1 bg-surface-container-high rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 60%;"></div>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">60%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Als Nächstes empfohlen -->
+<section>
+<h3 class="font-headline-lg text-headline-lg text-primary md:text-headline-lg-mobile mb-md">Als Nächstes empfohlen</h3>
+<div class="flex flex-col gap-sm">
+<!-- Recommendation Item 1 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/10 flex items-center justify-between hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary">Brüche addieren</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Mathematik • Geschätzte Dauer: 15 Min</p>
+</div>
+</div>
+<button class="hidden md:flex items-center gap-xs font-label-sm text-label-sm text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary-container px-sm py-xs rounded-lg transition-colors">
+                        Starten <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<!-- Recommendation Item 2 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-outline-variant/10 flex items-center justify-between hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-primary">Kommasetzung bei Relativsätzen</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Sprache • Geschätzte Dauer: 10 Min</p>
+</div>
+</div>
+<button class="hidden md:flex items-center gap-xs font-label-sm text-label-sm text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary-container px-sm py-xs rounded-lg transition-colors">
+                        Starten <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-md pb-safe bg-surface bg-surface-container-lowest dark:bg-inverse-surface shadow-[0px_-4px_20px_rgba(45,76,126,0.08)] shadow-lg rounded-t-xl py-sm">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-sm scale-90 duration-200" href="#">
+<span class="material-symbols-outlined filled">school</span>
+<span class="font-label-sm text-label-sm mt-xs">Learn</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-sm hover:bg-surface-container-high transition-transform" href="#">
+<span class="material-symbols-outlined">auto_graph</span>
+<span class="font-label-sm text-label-sm mt-xs">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-sm hover:bg-surface-container-high transition-transform" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-label-sm text-label-sm mt-xs">Tutor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-sm hover:bg-surface-container-high transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-xs">Profile</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-dim dark:bg-inverse-surface w-full py-xl border-t border-outline-variant/20 w-full flex flex-col items-center justify-center gap-md text-center px-gutter mt-auto pb-24 lg:pb-xl">
+<div class="text-on-surface font-bold text-center">
+<p class="font-caption text-caption text-on-surface-variant">© 2024 EduSovereign. 🇨🇭 In CH/EU gehostet</p>
+<p class="font-label-sm text-label-sm mt-xs underline decoration-secondary text-primary">Lehrperson behält die Kontrolle</p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-md">
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<span class="text-outline-variant">•</span>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<span class="text-outline-variant">•</span>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#">Ethical AI Commitment</a>
+</div>
+</footer>
+</body></html>

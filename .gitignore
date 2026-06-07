@@ -22,6 +22,6 @@ dist/
 Thumbs.db
 
 # Planning source artifacts (kept locally, not versioned)
-files.zip
+*.zip
 .archive/
 .github-bootstrap/

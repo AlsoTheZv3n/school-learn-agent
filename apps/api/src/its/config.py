@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     llm_backend: str = "local"
     llm_api_key: str | None = None
     jwt_public_key: str | None = None
+    # DEV ONLY: accept dev: tokens + mount /dev helpers. NEVER enable in production.
+    auth_dev_mode: bool = False
 
 
 settings = Settings()  # type: ignore[call-arg]
