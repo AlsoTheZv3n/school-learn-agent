@@ -25,3 +25,7 @@ Thumbs.db
 *.zip
 .archive/
 .github-bootstrap/
+
+# docs: markdown stays local, not versioned (per request)
+docs/*.md
+docs/**/*.md

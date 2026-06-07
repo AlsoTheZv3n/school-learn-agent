@@ -1,89 +1,161 @@
-# ITS Platform — Implementierungsplan
+# EduSovereign — Intelligent Tutoring System (ITS)
 
-Ein Intelligent Tutoring System (ITS): Lernmaterial pro Stufe/Fach, ein individueller
-Lernstand pro Schüler:in, ein Agent der erklärt und abfragt, sowie eine Lehrer:innen-Ansicht
-zur Kontrolle und Intervention — auf einer datenschutzkonformen Datenbasis.
+Ein datenschutzkonformes Intelligent Tutoring System für Schulen: Lernmaterial pro
+Stufe/Fach, ein individueller, **inspizierbarer** Lernstand pro Schüler:in, ein
+pädagogischer Agent, der erklärt und abfragt — und eine Lehrer:innen-Ansicht zur
+Kontrolle und Intervention. Gebaut für **Minderjährige**, deshalb Safety und
+Datenresidenz (CH/EU) als Voraussetzung, nicht als Zusatz.
 
-Dieses Verzeichnis enthält die **vollständige Planung**, aufgeteilt in einzeln umsetzbare
-Arbeitspakete. Es ist so aufbereitet, dass **Claude Code** das Projekt Schritt für Schritt
-umsetzen kann — beginnend mit dem Anlegen von GitHub-Milestones, -Epics und -Issues.
-
----
-
-## Für Claude Code — Reihenfolge der Umsetzung
-
-> **Schritt 0 (zuerst):** Lies [`docs/00-architecture.md`](docs/00-architecture.md) vollständig.
-> Dort stehen die **nicht verhandelbaren Prinzipien** (Safety zuerst, kuratierte Antworten,
-> PII-Anonymisierung, BKT vor DKT, genau eine Plugin-Naht). Halte dich in jedem Arbeitspaket
-> daran.
->
-> **Schritt 1:** Setze die GitHub-Struktur gemäss [`docs/01-github-issues.md`](docs/01-github-issues.md)
-> um (Labels → Milestones → Epics → Issues). Erst danach mit Code beginnen.
->
-> **Schritt 2 ff.:** Arbeite die Dokumente `02` bis `11` in numerischer Reihenfolge ab. Jedes
-> Dokument nennt seine Voraussetzungen, die zu erstellenden Dateien, konkrete Schemata/Signaturen,
-> Akzeptanzkriterien und die zugehörigen Issue-Keys.
-
-Jedes Implementierungsdokument endet mit einem Abschnitt **„Claude-Code-Prompt"** — ein
-copy-paste-fähiger Auftrag, der dieses eine Arbeitspaket abgeschlossen umsetzt.
+Status: **vollständig implementiert** (Backend + Frontend), getestet (59+ Tests,
+CI-grün). Auth, das echte LLM und der Embedder sind bewusst noch Stubs — siehe
+[Pre-Prod-Gates](#pre-prod-gates).
 
 ---
 
-## Dokumentenindex
+## Architektur
 
-| # | Datei | Inhalt | GitHub-Epic |
-|---|-------|--------|-------------|
-| 00 | [`docs/00-architecture.md`](docs/00-architecture.md) | Architektur, Tech-Stack, Kernprinzipien, Constraints | — |
-| 01 | [`docs/01-github-issues.md`](docs/01-github-issues.md) | Milestones, Epics, Issues + `gh`-Bootstrap | — |
-| 02 | [`docs/02-foundations.md`](docs/02-foundations.md) | Monorepo, Docker (Postgres+pgvector), FastAPI-Skeleton, `uv` | `E1` |
-| 03 | [`docs/03-database.md`](docs/03-database.md) | Schema, SQLAlchemy-Modelle, Alembic-Migrationen | `E2` |
-| 04 | [`docs/04-safety.md`](docs/04-safety.md) | RLS-Policies, Min-Cohort-Schwelle, Scoping | `E3` |
-| 05 | [`docs/05-retrieval.md`](docs/05-retrieval.md) | Router + 3 Modi (semantic/individual/population) + Graph + Ingestion | `E4`, `E5` |
-| 06 | [`docs/06-learner-model-and-grading.md`](docs/06-learner-model-and-grading.md) | BKT-Lernmodell + `GraderStrategy`-Registry | `E6`, `E7` |
-| 07 | [`docs/07-agent.md`](docs/07-agent.md) | LangGraph-Loop, LLM-Client, Anonymisierung, Prompts | `E8` |
-| 08 | [`docs/08-backend-api.md`](docs/08-backend-api.md) | Student- & Lehrer-Endpoints, Schemas, Auth-Deps | `E9` |
-| 09 | [`docs/09-frontend.md`](docs/09-frontend.md) | React/TS: Schüler-Session + Lehrer-Dashboard | `E10`, `E11` |
-| 10 | [`docs/10-testing.md`](docs/10-testing.md) | Teststrategie, Safety-Tests, Fixtures, CI | `E12` |
-| 11 | [`docs/11-mock-data-and-production.md`](docs/11-mock-data-and-production.md) | Mock-Seeder + Produktionsdaten-Pfad + Env-Toggles | `E13`, `E14` |
+```
+                 Schüler:in                    Lehrperson
+                     ↕                              ↕
+            Pädagogischer Agent  ⇄  Open Learner Model + Dashboard
+              (LangGraph-Loop)            (Mastery + Unsicherheit)
+                     ↓ fragt Wissen ab
+              Retrieval-Router
+            ┌────────┼────────┐
+        Semantic  Individual  Population
+       (geteilt) (1 Schüler)  (Kohorte ≥ k)
+            └────────┼────────┘
+        ╔════════════▼════════════╗
+        ║   Safety & Isolation    ║  Row-Level Security · Min-Cohort-Schwelle
+        ╚════════════▼════════════╝
+              ein PostgreSQL + pgvector
+```
+
+### Nicht verhandelbare Prinzipien
+- **P1 — Safety in der DB:** Isolation per **Row-Level Security**, nicht per App-`if`.
+- **P2 — Kuratierte Bewertung:** `assess` prüft gegen einen kuratierten Answer-Key
+  (symbolisch via `sympy`), **nicht** per LLM. Generative Freiheit nur beim Erklären.
+- **P3 — Das Modell verbessert sich, nicht der Agent:** ein interpretierbares
+  **Bayesian Knowledge Tracing** (BKT) pro Skill; Agentverhalten ist Funktion davon.
+- **P4 — PII verlässt die Maschine nicht:** Anonymisierung vor jedem externen LLM-Call.
+- **P5 — Open Learner Model:** Lehrer-Sicht zeigt Mastery **inkl. Unsicherheit**;
+  Schüler-Sicht nie die Rohschätzung.
+- **P6 — Mensch im Loop:** Lehrperson kann verifizieren, überschreiben, Notizen geben.
+- **P7 — Genau eine Plugin-Naht:** fachspezifische Bewertung (`grading/`).
+- **P8 — Datenresidenz CH/EU** · **P9 — `uv` ausschliesslich (kein `pip`).**
 
 ---
 
-## Kurzüberblick Tech-Stack
+## Tech-Stack
 
-| Architekturteil | Wahl |
+| Teil | Wahl |
 |---|---|
-| Vektorstore + relationale Daten + Kohorten-Aggregate | **ein** PostgreSQL + `pgvector` |
-| Link-Graph (Obsidian-Stil) | `edges`-Tabelle + rekursive CTE |
-| Safety- & Isolations-Gate | Postgres **Row-Level Security** + Min-Cohort-Check |
-| Retrieval-Router + Agent-Loop | **LangGraph** |
-| Lernmodell | **Bayesian Knowledge Tracing** (NumPy) → DKT später |
-| Erklärung/Umformulierung | Frontier-API (anonymisiert) **oder** lokal (Qwen2.5) |
-| Backend / Frontend | **FastAPI** + **React/TypeScript** |
-| Auth + Hosting | Keycloak/Entra ID + CH/EU-Region |
-| Fachspezifische Bewertung | `GraderStrategy`-Adapter (einzige Plugin-Naht) |
-| Python-Tooling | **`uv`** ausschliesslich (kein `pip`) |
+| Datenbank (Vektor + relational + Aggregate) | **ein** PostgreSQL + `pgvector` |
+| Isolation | Postgres **Row-Level Security** + Min-Cohort-Check |
+| Agent / Retrieval-Router | **LangGraph** |
+| Lernmodell | **BKT** (interpretierbar; DKT als späterer Swap) |
+| Bewertung | `GraderStrategy`-Registry (Math symbolisch via `sympy`) |
+| LLM / Embeddings | Backend umschaltbar (`local` Stub · `frontier`), anonymisiert |
+| Backend | **FastAPI** + Pydantic (Python ≥ 3.12, `uv`) |
+| Frontend | **React + TypeScript + Vite + Tailwind** (Design „EduSovereign") |
+| Auth | Rollen student/teacher/admin (JWT-Stub; IdP folgt) |
 
 ---
 
-## Detailplanung & GitHub-Struktur (ergänzt)
+## Repository-Layout
 
-Aufbauend auf den 13 Foundation-Dokumenten (00–11) liegt eine **Detailplanungs-Ebene** bei:
+```
+apps/
+  api/                 # FastAPI-Backend (uv)
+    src/its/
+      db/              # SQLAlchemy-Modelle, Session (RLS-Hook), Alembic-Migrationen
+      safety/          # rls.sql, scoping.py, cohort.py   ← das Isolations-Gate
+      retrieval/       # router + semantic/individual/population + graph (CTE)
+      content/         # parser, ingest, kuratierte Items
+      learner_model/   # bkt.py, tracing.py, dkt.py (Stub)
+      grading/         # base + registry + math/language/history (Plugin-Naht)
+      agent/           # LangGraph: state.py, graph.py, nodes/   ← der Agent
+      llm/             # client.py, anonymize.py, embeddings.py, prompts/
+      api/             # student.py, teacher.py, content.py, dev.py, errors.py
+  web/                 # React/TS-Frontend (Vite + Tailwind)
+content/               # kuratierter Markdown-Vault (Demo)
+infra/                 # docker-compose (Postgres + pgvector)
+scripts/               # seed.py, import_production.py, GitHub-Bootstrap
+tests/                 # pytest (inkl. CI-blockierende Safety-Tests)
+```
 
-| Was | Wo |
-|---|---|
-| Pro-Epic-Detailplanung (Scope, Sub-Tasks, Designentscheidungen, Risiken, offene Fragen) | [`docs/planning/`](docs/planning/) |
-| Konsolidierte offene Fragen & Risiken (89 Entscheidungen, 102 Risiken) | [`docs/planning/open-questions-and-risks.md`](docs/planning/open-questions-and-risks.md) |
-| Pro-Task-Issue-Bodies (eigenständig umsetzbar, je 1 `.md` pro Task) | [`docs/issues/`](docs/issues/) |
-| Maschinenlesbare Issue-/Label-/Milestone-Definition | [`scripts/issues.manifest.json`](scripts/issues.manifest.json) |
-| Idempotentes GitHub-Bootstrap (Labels → Milestones → Epics → 50 Sub-Issues) | [`scripts/bootstrap_github.ps1`](scripts/bootstrap_github.ps1) · [`.sh`](scripts/bootstrap_github.sh) |
+---
 
-Die GitHub-Issues (14 Epics als Tracking-Issues + 50 Task-Issues als native Sub-Issues, Milestones M0–M6) werden aus dem Manifest erzeugt:
+## Lokal starten (3 Teile)
+
+> Voraussetzungen: Docker, [`uv`](https://docs.astral.sh/uv/), Node ≥ 20.
+> Die Ports (DB 5433, API 8010, Web 5181) sind so gewählt, dass sie nicht mit anderen
+> lokalen Diensten kollidieren — anpassbar in `infra/docker-compose.yml` und
+> `apps/web/vite.config.ts`.
+
+**1) Datenbank**
+```bash
+docker compose -f infra/docker-compose.yml up -d   # Postgres + pgvector auf 127.0.0.1:5433
+```
+
+**2) Backend** (aus `apps/api/`)
+```bash
+# Umgebung (PowerShell-Beispiel)
+$env:DATABASE_URL = "postgresql+psycopg://its:its_dev_pw@127.0.0.1:5433/its"
+$env:DATA_MODE = "mock"; $env:AUTH_DEV_MODE = "1"
+
+uv sync
+uv run alembic upgrade head                         # Schema + RLS + Seed
+uv run python ../../scripts/seed.py --profile demo  # 1 Klasse, 25 Schüler:innen, 1 Lehrperson
+uv run uvicorn its.main:app --host 127.0.0.1 --port 8010
+```
+
+**3) Frontend** (aus `apps/web/`)
+```bash
+npm install
+npm run dev          # → http://localhost:5181  (proxyt /student,/teacher,… an :8010)
+```
+
+Im Browser oben rechts **„Lehrer-Ansicht"** bzw. in der Lehrer-Sidebar **„Schüler-Ansicht"**
+wechselt die Rolle. In der Lernsession eine Aufgabe beantworten → kuratierte Bewertung +
+Mastery-Update; im Lehrer-Dashboard auf „Details" → Open Learner Model mit Unsicherheit.
+
+---
+
+## Der Agent
+
+Der pädagogische Agent ist eine **LangGraph-State-Machine** unter `apps/api/src/its/agent/`:
+
+```
+route → retrieve → (intent=answer? → assess → update_model | sonst → explain) → END
+```
+
+- `assess` bewertet mit dem **kuratierten** Grader (P2), `update_model` schreibt das
+  Ergebnis via **BKT** ins Learner-Modell (P3), `explain` ist der einzige generative Pfad.
+- Ausgelöst über `POST /student/turn` (`api/student.py`), sichtbar in der **Lernsession**.
+
+---
+
+## Tests & CI
 
 ```bash
-gh auth login                       # einmalig
-pwsh scripts/bootstrap_github.ps1   # Windows/pwsh
-bash scripts/bootstrap_github.sh    # Linux/CI (benötigt jq)
+cd apps/api && uv run pytest          # alle Tests (Safety-Tests gegen echtes Postgres)
+cd apps/web && npm run build          # tsc-Typecheck + Vite-Build
 ```
+
+GitHub Actions (`.github/workflows/ci.yml`) hat zwei Jobs: **`test`** (pytest mit
+vorgelagertem, blockierendem Safety-Gate) und **`web`** (Frontend-Build).
+
+---
+
+## Pre-Prod-Gates
+
+Bewusst vereinfacht — **vor echtem Schülerdaten-Betrieb zu ersetzen**:
+1. **Auth:** `current_principal` ist ein Stub. Für lokales Testen akzeptiert er
+   `dev:<role>:<user>[:<student>]`-Tokens, wenn `AUTH_DEV_MODE=1`. → echtes JWT/IdP.
+2. **LLM:** `llm/client.py` lokaler Backend = deterministischer Stub. → lokales Modell
+   (Qwen2.5) **oder** Frontier-API mit AVV/No-Training (Anonymisierung steht bereits).
+3. **Embedder:** `HashingEmbedder`-Stub. → echtes Embedding-Modell.
 
 ---
 
@@ -91,6 +163,8 @@ bash scripts/bootstrap_github.sh    # Linux/CI (benötigt jq)
 
 Diese Plattform verarbeitet identifizierbare Daten über **Minderjährige**. Datenresidenz
 (CH/EU, revDSG/DSGVO), PII-Minimierung im LLM-Pfad und die Isolationsgarantien sind
-**keine optionalen Features**, sondern Voraussetzung. Die rechtlichen Detailangaben in
-[`docs/11`](docs/11-mock-data-and-production.md) sind gegen **aktuelle** Quellen zu prüfen,
-da sich Vorgaben für Ed-Tech laufend ändern können.
+**keine optionalen Features**, sondern Voraussetzung. Vor Produktivbetrieb mit echten
+Schülerdaten ist eine fachliche/rechtliche Prüfung gegen aktuelle Quellen erforderlich.
+
+> Die ausführliche Planung, die Fachspezifikationen, der Sicherheits-Audit und die
+> Compliance-Details liegen lokal unter `docs/` (nicht im Repository versioniert).
