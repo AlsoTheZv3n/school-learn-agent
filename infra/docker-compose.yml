@@ -10,7 +10,9 @@ services:
       POSTGRES_PASSWORD: its_dev_pw
       POSTGRES_DB: its
     ports:
-      - "5432:5432"
+      # Host 5433 (not 5432): a native PostgreSQL service may already own 5432 on
+      # dev machines. Bound to localhost only. Container-internal port stays 5432.
+      - "127.0.0.1:5433:5432"
     volumes:
       - its_pgdata:/var/lib/postgresql/data
       - ./init:/docker-entrypoint-initdb.d:ro
