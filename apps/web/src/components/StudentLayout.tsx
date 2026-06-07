@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 import Footer from "./Footer";
 import { Icon } from "./Icon";
+import { NavActions } from "./NavMenus";
 
 const LINKS = [
   { to: "/", label: "Heute", end: true },
@@ -52,16 +53,7 @@ export default function StudentLayout() {
           >
             <Icon name="switch_account" className="text-[18px]" /> Lehrer-Ansicht
           </Link>
-          <button className="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container-low">
-            <Icon name="security" />
-          </button>
-          <button className="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container-low relative">
-            <Icon name="notifications" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-error rounded-full" />
-          </button>
-          <button className="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container-low">
-            <Icon name="account_circle" />
-          </button>
+          <NavActions role="student" />
         </div>
       </header>
 

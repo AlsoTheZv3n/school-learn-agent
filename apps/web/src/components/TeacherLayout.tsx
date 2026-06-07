@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 import Footer from "./Footer";
 import { Icon } from "./Icon";
+import { NavActions } from "./NavMenus";
 
 const NAV = [
   { to: "/teacher", icon: "dashboard", label: "Dashboard", end: true },
@@ -62,18 +63,7 @@ export default function TeacherLayout() {
             <span className="font-headline-lg text-headline-lg font-bold text-primary">EduSovereign</span>
           </div>
           <div className="hidden lg:block" />
-          <div className="flex items-center gap-md">
-            <button className="text-on-surface-variant hover:text-primary transition-colors relative">
-              <Icon name="notifications" />
-              <span className="absolute top-0 right-0 w-2 h-2 bg-error rounded-full" />
-            </button>
-            <button className="text-on-surface-variant hover:text-primary transition-colors">
-              <Icon name="security" />
-            </button>
-            <button className="text-on-surface-variant hover:text-primary transition-colors">
-              <Icon name="account_circle" />
-            </button>
-          </div>
+          <NavActions role="teacher" />
         </header>
         <main className="flex-1 p-gutter md:p-xl space-y-xl">
           <Outlet />

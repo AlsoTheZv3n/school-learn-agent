@@ -7,6 +7,11 @@
     font-family: "Plus Jakarta Sans", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
+  /* Accessibility: dyslexia-friendly typeface toggle (Profil-Menü) */
+  html.readable,
+  html.readable body {
+    font-family: "Atkinson Hyperlegible", "Plus Jakarta Sans", system-ui, sans-serif;
+  }
 }
 
 @layer utilities {
