@@ -1,0 +1,46 @@
+[project]
+name = "its-api"
+version = "0.1.0"
+description = "ITS Platform API — Intelligent Tutoring System backend"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "psycopg[binary]>=3.2",
+  "pgvector>=0.3",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.5",
+  "python-jose[cryptography]>=3.3",
+  "langgraph>=0.2",
+  "numpy>=2.1",
+  "sympy>=1.13",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3",
+  "pytest-asyncio>=0.24",
+  "httpx>=0.27",
+  "ruff>=0.7",
+]
+
+# Build backend for the src/ layout (open question E1 #1 -> Hatchling, explicit src mapping).
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/its"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+# Tests live at the repo root tests/ (docs/10). CI runs `uv run pytest` from apps/api,
+# so testpaths points there. asyncio_mode=auto avoids per-test markers (open question E1 #3).
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["../../tests"]

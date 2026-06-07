@@ -1,0 +1,52 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: its
+          POSTGRES_PASSWORD: its_dev_pw
+          POSTGRES_DB: its
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd "pg_isready -U its -d its"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql+psycopg://its:its_dev_pw@localhost:5432/its
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Enable extensions
+        run: |
+          sudo apt-get update && sudo apt-get install -y postgresql-client
+          psql "postgresql://its:its_dev_pw@localhost:5432/its" -c "CREATE EXTENSION IF NOT EXISTS vector;"
+          psql "postgresql://its:its_dev_pw@localhost:5432/its" -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
+
+      - name: Install dependencies (uv, no pip)
+        working-directory: apps/api
+        run: uv sync
+
+      - name: Lint (ruff, non-blocking for now)
+        working-directory: apps/api
+        continue-on-error: true
+        run: uv run ruff check .
+
+      # Safety gate placeholder: once SAF-4 lands (M1), the RLS + cohort tests run
+      # here as a dedicated, blocking step BEFORE the full suite (see docs/10 §7):
+      #   - name: Safety gate (blocking)
+      #     working-directory: apps/api
+      #     run: uv run pytest ../../tests/test_rls.py ../../tests/test_cohort_threshold.py -q
+
+      - name: Test
+        working-directory: apps/api
+        run: uv run pytest -q
